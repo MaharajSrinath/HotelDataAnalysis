@@ -56,6 +56,49 @@ We have hotel booking dataset for the year 2018, 2019 & 2020, this dataset conta
 
 
 1. Build a Database:
-   Creating a database named "HotelDataAnalysis" and imported with the data consisting of multiple tables and renamed as '2018$', '2019$', '2020$', 'market_segment$', 'meal_cost$'
+Creating a database named "HotelDataAnalysis" and imported with the data consisting of multiple tables and renamed as '2018$', '2019$', '2020$', 'market_segment$', 'meal_cost$'
+![image](https://github.com/MaharajSrinath/HotelDataAnalysis/assets/146663011/910c53f1-9ffe-4dc2-acb5-572eeba9e6b2)
+
+2. Develop SQL Query:
+
+* Taking a look at the data
+```SQL
+  use HotelDataAnalysis
+  select * from dbo.[2018$]
+```
+   OUTPUT
+```
+
+Resort Hotel	1	85	2018	July	27	1	0	3	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	A	A	0	No Deposit	240	NULL	0	Transient	82	0	1	Canceled	2018-05-06 00:00:00.000
+Resort Hotel	1	75	2018	July	27	1	0	3	2	0	0	HB	PRT	Offline TA/TO	TA/TO	0	0	0	D	D	0	No Deposit	15	NULL	0	Transient	105.5	0	0	Canceled	2018-04-22 00:00:00.000
+Resort Hotel	1	23	2018	July	27	1	0	4	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	E	E	0	No Deposit	240	NULL	0	Transient	123	0	0	Canceled	2018-06-23 00:00:00.000
+Resort Hotel	1	60	2018	July	27	1	2	5	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	E	E	0	No Deposit	240	NULL	0	Transient	107	0	2	Canceled	2018-05-11 00:00:00.000
+Resort Hotel	1	96	2018	July	27	1	2	8	2	0	0	BB	PRT	Direct	Direct	0	0	0	E	E	0	No Deposit	NULL	NULL	0	Transient	108.3	0	2	Canceled	2018-05-29 00:00:00.000
+Resort Hotel	1	45	2018	July	27	2	1	3	3	0	0	BB	PRT	Online TA	TA/TO	0	0	0	D	D	0	No Deposit	241	NULL	0	Transient	108.8	0	1	Canceled	2018-05-19 00:00:00.000
+Resort Hotel	1	40	2018	July	27	2	1	3	3	0	0	BB	PRT	Online TA	TA/TO	0	0	0	D	D	0	No Deposit	241	NULL	0	Transient	108.8	0	1	Canceled	2018-06-19 00:00:00.000
+Resort Hotel	1	43	2018	July	27	2	1	3	3	0	0	BB	PRT	Online TA	TA/TO	0	0	0	D	D	0	No Deposit	241	NULL	0	Transient	108.8	0	0	Canceled	2018-05-23 00:00:00.000
+Resort Hotel	1	45	2018	July	27	2	2	3	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	G	G	0	No Deposit	241	NULL	0	Transient	117.81	0	0	Canceled	2018-05-18 00:00:00.000
+Resort Hotel	1	47	2018	July	27	2	2	5	2	2	0	BB	PRT	Online TA	TA/TO	0	0	0	G	G	0	No Deposit	240	NULL	0	Transient	153	0	0	Canceled	2018-06-02 00:00:00.000
+Resort Hotel	1	3	2018	July	27	2	0	3	2	0	0	HB	PRT	Online TA	TA/TO	0	0	0	A	A	0	No Deposit	240	NULL	0	Transient	136.33	0	2	Canceled	2018-06-29 00:00:00.000
+Resort Hotel	1	71	2018	July	27	3	0	2	3	0	0	BB	PRT	Offline TA/TO	TA/TO	0	0	0	A	A	0	No Deposit	242	NULL	0	Transient	110.3	0	2	Canceled	2018-06-16 00:00:00.000
+Resort Hotel	1	63	2018	July	27	3	0	2	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	A	A	0	No Deposit	240	NULL	0	Transient	82	0	2	Canceled	2018-06-18 00:00:00.000
+Resort Hotel	1	62	2018	July	27	3	0	2	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	D	D	0	No Deposit	240	NULL	0	Transient	97	0	1	Canceled	2018-07-03 00:00:00.000
+Resort Hotel	1	101	2018	July	27	3	0	2	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	A	A	0	No Deposit	240	NULL	0	Transient	73.8	0	1	Canceled	2018-06-12 00:00:00.000
+Resort Hotel	1	51	2018	July	27	3	0	2	3	0	0	BB	PRT	Online TA	TA/TO	0	0	0	A	A	0	No Deposit	242	NULL	0	Transient	110.3	0	0	Canceled	2018-06-09 00:00:00.000
+Resort Hotel	1	48	2018	July	27	3	1	2	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	E	E	0	No Deposit	240	NULL	0	Transient	123	0	0	Canceled	2018-05-26 00:00:00.000
+Resort Hotel	1	368	2018	July	27	3	3	7	2	0	0	BB	PRT	Offline TA/TO	TA/TO	0	0	0	A	A	0	No Deposit	40	NULL	0	Contract	55.68	0	0	Canceled	2018-05-19 00:00:00.000
+Resort Hotel	1	81	2018	July	27	3	3	7	2	0	0	HB	PRT	Direct	Direct	0	0	0	A	A	2	No Deposit	250	NULL	0	Transient	124	0	1	Canceled	2018-06-09 00:00:00.000
+Resort Hotel	1	79	2018	July	27	3	6	15	2	1	0	BB	PRT	Offline TA/TO	TA/TO	0	0	0	A	A	0	No Deposit	242	NULL	0	Transient	108.73	0	2	Canceled	2018-04-15 00:00:00.000
+Resort Hotel	1	109	2018	July	27	3	0	2	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	A	A	0	No Deposit	240	NULL	0	Transient	123	0	1	Canceled	2018-05-26 00:00:00.000
+Resort Hotel	1	72	2018	July	27	3	0	2	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	A	A	0	No Deposit	240	NULL	0	Transient	73.8	0	1	Canceled	2018-06-29 00:00:00.000
+Resort Hotel	1	63	2018	July	27	3	2	5	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	F	F	0	No Deposit	242	NULL	0	Transient	117	0	1	Canceled	2018-05-13 00:00:00.000
+Resort Hotel	1	26	2018	July	27	4	2	5	2	2	0	BB	PRT	Online TA	TA/TO	0	0	0	H	H	0	No Deposit	240	NULL	0	Transient	163	0	0	Canceled	2018-06-09 00:00:00.000
+Resort Hotel	1	73	2018	July	27	4	2	5	3	0	0	HB	PRT	Direct	Direct	0	0	0	D	D	0	No Deposit	250	NULL	0	Transient	172	0	1	Canceled	2018-05-20 00:00:00.000
+Resort Hotel	1	102	2018	July	27	4	2	5	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	A	A	0	No Deposit	240	NULL	0	Transient	110.7	0	1	Canceled	2018-04-22 00:00:00.000
+```
+
+
+   
+
    
 
