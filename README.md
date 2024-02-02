@@ -54,20 +54,28 @@ We have hotel booking dataset for the year 2018, 2019 & 2020, this dataset conta
 
 **Build a Database** --> **Develop SQL Query** --> **Connect to Power BI to the database** --> **Visualize** --> **Summarize findings**
 
-
-1. Build a Database:
+**1. Build a Database:**
+   
 Creating a database named "HotelDataAnalysis" and imported with the data consisting of multiple tables and renamed as '2018$', '2019$', '2020$', 'market_segment$', 'meal_cost$'
+
 ![image](https://github.com/MaharajSrinath/HotelDataAnalysis/assets/146663011/910c53f1-9ffe-4dc2-acb5-572eeba9e6b2)
 
-2. Develop SQL Query:
+**2. Develop SQL Query:**
 
-* Taking a look at the data
+a) Taking a look at the data
+
+- Total number of columns in table 2018,2019 & 2020: 32 
+- Total number of rows in 2018 table:   21,996
+- Total number of rows in 2019 table:   79,264
+- Total number of rows in 2020 table:   40,687
+- Total number of rows in all tables: 1,41,947
+   
 ```SQL
   use HotelDataAnalysis
   select * from dbo.[2018$]
 ```
-   OUTPUT
-```
+```sql
+-- OUTPUT
 
 Resort Hotel	1	85	2018	July	27	1	0	3	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	A	A	0	No Deposit	240	NULL	0	Transient	82	0	1	Canceled	2018-05-06 00:00:00.000
 Resort Hotel	1	75	2018	July	27	1	0	3	2	0	0	HB	PRT	Offline TA/TO	TA/TO	0	0	0	D	D	0	No Deposit	15	NULL	0	Transient	105.5	0	0	Canceled	2018-04-22 00:00:00.000
@@ -97,8 +105,99 @@ Resort Hotel	1	73	2018	July	27	4	2	5	3	0	0	HB	PRT	Direct	Direct	0	0	0	D	D	0	No D
 Resort Hotel	1	102	2018	July	27	4	2	5	2	0	0	BB	PRT	Online TA	TA/TO	0	0	0	A	A	0	No Deposit	240	NULL	0	Transient	110.7	0	1	Canceled	2018-04-22 00:00:00.000
 ```
 
+b) Cleaning the data
+- REMOVING DUPLICATE ROWS IF ANY
 
-   
+Union of multiple table as Hoteldata: It is observed that all tables for year 2018, 2019, 2020 have same number of columns with similar datatypes and in same order, UNION operator is used to combine. Total number of rows reduced to 1,00,756 after removing duplicates.
+
+```sql
+with hoteldata as (
+select * from dbo.[2018$]
+union /* union operator removes all duplicates, if not required we can use UNION ALL operator */
+select * from dbo.[2019$]
+union
+select * from dbo.[2020$])
+
+select count(*) as total_rows from Hoteldata
+```
+```
+-- OUTPUT
+100756
+```
+
+- HANDLING NULL VALUES
+
+First we will see the datatypes of all the columns and try to understand what unique values the columns hold. With that we can handle the missing/Null values and change the datatypes incase required.
+
+Datatype of Columns
+
+![image](https://github.com/MaharajSrinath/HotelDataAnalysis/assets/146663011/34c054ab-ac38-4c4c-a15f-2e13e0567772)
+
+
+Checking the unqiue values the columns hold
+
+```sql
+select distinct hotel from Hoteldata
+```
+```sql
+-- OUTPUT
+City Hotel
+Resort Hotel
+```
+
+```sql
+select distinct is_canceled from Hoteldata
+```
+```sql
+-- OUTPUT
+0
+1
+```
+
+```sql
+select distinct children from Hoteldata
+```
+```sql
+-- OUTPUT
+NULL
+0
+1
+2
+3
+10
+```
+Note: This column 'children' has 0 as value which mean no children were present in the customers, so NULL values are the missing values or 0. We can replace the null values with mean value of children but mean is between 0 & 1 so we replace with 0.
+```sql
+select avg(children) from Hoteldata
+```
+```
+-- OUTPUT
+0.133680073053559
+```
+```sql
+Update dbo.[2020$] /* also 2018$ & 2019$ */
+SET children = 0
+Where children IS NULL;
+-- all NULL values are replaced with 0 now.
+```
+```sql
+select country, count(country) from Hoteldata
+where country = 'NULL'
+group by country  
+```
+```sql
+-- OUTPUT
+NULL	561  /* replaced all the values written as NULL to OTHERS */
+```
+```sql
+Update dbo.[2020$]  /* also 2018$ & 2019$ */
+SET country = 'OTHERS'
+where country = 'NULL'
+```
+```sql
+-- OUTPUT
+(83 rows affected) /* (133 rows affected) (345 rows affected) */
+```
 
    
 
