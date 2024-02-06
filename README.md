@@ -358,7 +358,7 @@ City Hotel	59800	59	108.97
 Resort Hotel	40760	40	98.26
 ```
 
-Around 60% bookings are for City Hotel and 40% bookings are for Resort Hotel. Average ADR of City Hotel is slightly higher than that of Resort Hotel, City hotel seems to be making slightly more revenue.
+   Around 60% bookings are for City Hotel and 40% bookings are for Resort Hotel. Average ADR of City Hotel is slightly higher than that of Resort Hotel, City hotel seems to be making slightly more revenue.
 
 Q 3) How long do people stay at the hotels?
 
@@ -462,16 +462,16 @@ Most common stay length is 3 days/nights and we can observe here that for shorte
 
 Now we import this data from SQL server to PowerBI for further analyzing the data and try to answer following questions.
 
- Q1) Which agent makes the most no. of bookings?
- Q2) Which room type is in most demand and which room type generates the highest adr?
- Q3) Which meal type is the most preffered meal of customers?
- Q4) What is the percentage of bookings in each hotel?
- Q5) Which is the most common channel for booking hotels?
- Q6) Which are the most busy months?
+ Q1) Which agent makes the most no. of bookings? done
+ Q2) Which room type is in most demand and which room type generates the highest adr? done
+ Q3) Which meal type is the most preffered meal of customers? done
+ Q4) What is the percentage of bookings in each hotel? done
+ Q5) Which is the most common channel for booking hotels? done
+ Q6) Which are the most busy months? 
  Q7) From which country most of the guests are comin ?
  Q8) How long do people stay at the hotels?
  Q9) Which hotel seems to make more revenue?
- Q10) Which hotel hasa  higher lead time?
+ Q10) Which hotel has a  higher lead time? done
  Q11) What is preferred stay length in each hotel?
  Q12) Which hotel has higher bookings cancellation rate.
  Q13) Which hotel hasa  high chance that its customer will return for another stay?
