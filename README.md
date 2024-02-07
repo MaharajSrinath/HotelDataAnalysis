@@ -468,17 +468,17 @@ Now we import this data from SQL server to PowerBI for further analyzing the dat
  Q4) What is the percentage of bookings in each hotel? done
  Q5) Which is the most common channel for booking hotels? done
  Q6) Which are the most busy months? 
- Q7) From which country most of the guests are comin ?
- Q8) How long do people stay at the hotels?
- Q9) Which hotel seems to make more revenue?
+ Q7) From which country most of the guests are coming ? done
+ Q8) How long do people stay at the hotels? done
+ Q9) Which hotel seems to make more revenue? done
  Q10) Which hotel has a  higher lead time? done
- Q11) What is preferred stay length in each hotel?
- Q12) Which hotel has higher bookings cancellation rate.
- Q13) Which hotel hasa  high chance that its customer will return for another stay?
- Q14) Which channel is mostly used forthe  early booking of hotels?
- Q15) Which channel hasa  longer average waiting time?
- Q16) Which distribution channel brings betterrevenue-generatingg deals for hotels?
- Q17) Which significant distribution channel has the highest cancellation percentage?
+ Q11) What is preferred stay length in each hotel? done
+ Q12) Which hotel has higher bookings cancellation rate. done
+ Q13) Which hotel has a high chance that its customer will return for another stay? done
+ Q14) Which channel is mostly used for the early booking of hotels? done
+ Q15) Which channel has a longer average waiting time? done 
+ Q16) Which distribution channel brings better revenue-generating deals for hotels? done
+ Q17) Which significant distribution channel has the highest cancellation percentage? 
  Q18) Doesa  longer waiting period or longer lead time causes the cancellation of bookings?
  Q19) Whether not getting allotted the same room type as demand is the main cause of cancellation for bookings?
  Q20) Does not alloting the  same room as demanded affect adr? 
