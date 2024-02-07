@@ -467,7 +467,7 @@ Now we import this data from SQL server to PowerBI for further analyzing the dat
  Q3) Which meal type is the most preffered meal of customers? done
  Q4) What is the percentage of bookings in each hotel? done
  Q5) Which is the most common channel for booking hotels? done
- Q6) Which are the most busy months? 
+ Q6) Which are the most busy months? ?????
  Q7) From which country most of the guests are coming ? done
  Q8) How long do people stay at the hotels? done
  Q9) Which hotel seems to make more revenue? done
@@ -478,12 +478,12 @@ Now we import this data from SQL server to PowerBI for further analyzing the dat
  Q14) Which channel is mostly used for the early booking of hotels? done
  Q15) Which channel has a longer average waiting time? done 
  Q16) Which distribution channel brings better revenue-generating deals for hotels? done
- Q17) Which significant distribution channel has the highest cancellation percentage? 
- Q18) Doesa  longer waiting period or longer lead time causes the cancellation of bookings?
+ Q17) Which significant distribution channel has the highest cancellation percentage? done
+ Q18) Does a longer waiting period or longer lead time causes the cancellation of bookings? 
  Q19) Whether not getting allotted the same room type as demand is the main cause of cancellation for bookings?
- Q20) Does not alloting the  same room as demanded affect adr? 
- Q21) What is the trend of bookings within a month?
- Q22) Which types of customers mostly make bookings?
+ Q20) Does not alloting the same room as demanded affect adr? 
+ Q21) What is the trend of bookings within a month? 
+ Q22) Which types of customers mostly make bookings? done
 
 
 -- We load the Hoteldata table along with market_segment$ and meal_cost$ table and establishing relationship in PowerBI.
