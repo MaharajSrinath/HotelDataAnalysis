@@ -458,33 +458,9 @@ Resort Hotel	69	1
 ```
 Most common stay length is 3 days/nights and we can observe here that for shorter stays say <=4 days City Hotel is preferred the most, whereas for longer stays Resort Hotel is preferred.
 
-**3. Connect to Power BI to the database** --> **4. Visualize** --> **5. Summarize findings**
+**3. Connect to Power BI to the database**
 
-Now we import this data from SQL server to PowerBI for further analyzing the data and try to answer following questions.
-
- Q1) Which agent makes the most no. of bookings? done
- Q2) Which room type is in most demand and which room type generates the highest adr? done
- Q3) Which meal type is the most preffered meal of customers? done
- Q4) What is the percentage of bookings in each hotel? done
- Q5) Which is the most common channel for booking hotels? done
- Q6) Which are the most busy months? ?????
- Q7) From which country most of the guests are coming ? done
- Q8) How long do people stay at the hotels? done
- Q9) Which hotel seems to make more revenue? done
- Q10) Which hotel has a  higher lead time? done
- Q11) What is preferred stay length in each hotel? done
- Q12) Which hotel has higher bookings cancellation rate. done
- Q13) Which hotel has a high chance that its customer will return for another stay? done
- Q14) Which channel is mostly used for the early booking of hotels? done
- Q15) Which channel has a longer average waiting time? done 
- Q16) Which distribution channel brings better revenue-generating deals for hotels? done
- Q17) Which significant distribution channel has the highest cancellation percentage? done
- Q18) Does a longer waiting period or longer lead time causes the cancellation of bookings? 
- Q19) Whether not getting allotted the same room type as demand is the main cause of cancellation for bookings?
- Q20) Does not alloting the same room as demanded affect adr? 
- Q21) What is the trend of bookings within a month? 
- Q22) Which types of customers mostly make bookings? done
-
+Now we import this data from SQL server to PowerBI for further analyzing the data and try to summarize findings
 
 -- We load the Hoteldata table along with market_segment$ and meal_cost$ table and establishing relationship in PowerBI.
 
@@ -513,6 +489,85 @@ on h.meal = mc.meal
 ```
 
 ![image](https://github.com/MaharajSrinath/HotelDataAnalysis/assets/146663011/dab850bd-e2ce-44dc-8874-7e12c10fbc80)
+
+**4. Visualize** 
+We answer the following questions performing EDA.
+
+ 1) Which agent makes the most no. of bookings?
+ 2) Which room type is in most demand and which room type generates the highest adr?
+ 3) Which meal type is the most preffered meal of customers?
+ 4) What is the percentage of bookings in each hotel?
+ 5) Which is the most common channel for booking hotels?
+ 6) Which are the most busy months?
+ 7) From which country most of the guests are coming ?
+ 8) How long do people stay at the hotels?
+ 9) Which hotel seems to make more revenue?
+ 10) Which hotel has a  higher lead time?
+ 11) What is preferred stay length in each hotel?
+ 12) Which hotel has higher bookings cancellation rate.
+ 13) Which hotel has a high chance that its customer will return for another stay?
+ 14) Which channel is mostly used for the early booking of hotels?
+ 15) Which channel has a longer average waiting time? 
+ 16) Which distribution channel brings better revenue-generating deals for hotels?
+ 17) Which significant distribution channel has the highest cancellation percentage?
+ 18) Does a longer waiting period or longer lead time causes the cancellation of bookings? 
+ 19) Whether not getting allotted the same room type as demand is the main cause of cancellation for bookings?
+ 20) Does not alloting the same room as demanded affect adr? 
+ 21) What is the trend of bookings within a month? 
+ 22) Which types of customers mostly make bookings?
+ 23) Do we required more parking lot space?
+
+
+**5. Summarize findings**
+
+After performing EDA on given dataset in SQL & POWER BI, made the following conclusions
+
+```
+1) Agent with No.9 made most of the bookings.
+2) Type A room is most demanded by customers, highest ADR generating rooms are H,G,F.
+3) BB(Breakfast & Bed) is the most preferred meal type by customers
+4) Around 60% of bookings are of City Hotel & 40% of Resort Hotel.
+5) Most common channel for booking is TA/TO.
+6) Most busy months are JUly & August.
+7) Most of guests are coming from Portugal, followed by UK, France.
+8) Most common stay length is <4 days, highest is 69. Generally people prefer City hotel for short stays, but for longer stays, Resort hotel is preferred.
+9) Average ADR of City Hotel is slightly higher than that of Resort Hotel, City hotel seems to be making slightly more revenue.
+10) City hotel & Resort hotel has same median lead time. Also median lead time is significantly higher in each case, this means customers generally plan their hotel visits way to early.
+11) Most common stay length is <4 days
+12) City hotel with 30% of bookings cancellation & 23% of Resort Hotel.
+13) Both hotels have very small percentage that customer will repeat, but Resort hotel has slightly higher repeat % than City Hotel.
+14) TA/TO is mostly used for early booking of hotel.
+15) Waiting time is also high for TA/TO channel
+16) GDS channel brings higher revenue generating deals for City hotel despite less percentage of bookings, followed by Direct bookings.
+17) Bookings done through TA/TO are 30% more likely to get cancelled.
+18) longer waiting period or longer lead time has no effect on cancellations.
+19) Not getting same room as demanded is not the case of cancellation of rooms. A significant percentage of bookings are not cancelled even after getting different room as demanded.
+20) Not getting same room do affects the adr, people who didn't got same room have paid a little lower adr.
+21) Arrival num of guests in hotels increases at weekends and average ADR tends to go up as month ends.
+22) Transient type has highest no of bookings, also bookings done by couple/family(adults>1) done most bookings.
+23) Majority of customers donot need car parking space, atleast 1no of parking space can cater the requirement upto 99.97% as per the data.
+```
+
+CONCULSIONS
+```
+1. Hotels should increase the no of room types of A & H to maximise revenue
+2. City hotel has significantly longer waiting time for confirmation, hence City Hotel is much busier than Resort Hotel.
+3. Most customers stay less than 4-5days, resort hotel is preferred for lomger stays.
+4. City Hotel can work to increase outreach on GDS channels to get more higher revenue generating deals.
+5. Number of bookings increased from the month of July to August.
+ and more
+
+A) There was a lot of duplicate data.
+B) Data was present in wrong datatype format.
+C) Choosing appropriate visualization techniques to use was difficult.
+D) A lot of null values were there in the dataset.
+
+
+
+
+
+
+
 
 
 
