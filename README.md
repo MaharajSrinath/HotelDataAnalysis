@@ -6,9 +6,9 @@ Our main goal is to develop a Database to analyze, draw useful conclusion about 
 Build a visual data story or dashboard using `Power BI` to present to your stakeholders
 
 ### Requirements from stakeholders
-Is our hotel revenue growing by year? We have two hotel types so it would be good to segment revenue by hotel type.
-Should we increase our parking lot size? we want to understand if there is a trend, is guest with personal cars?
-what trends can we see in the data? Focus on average daily rate and guests to explore seasonality.
+- Is our hotel revenue growing by year? We have two hotel types so it would be good to segment revenue by hotel type.
+- Should we increase our parking lot size? we want to understand if there is a trend, is guest with personal cars?
+- what trends can we see in the data? Focus on average daily rate and guests to explore seasonality.
 
 ## DATASET
 
@@ -54,9 +54,9 @@ We have hotel booking dataset for the year 2018, 2019 & 2020, this dataset conta
 
 **Build a Database** --> **Develop SQL Query(&Analysis using SQL)** --> **Connect to Power BI to the database** --> **Visualize** --> **Summarize findings**
 
-**1. Build a Database:**
+**1. BUILD A DATABASE:**
    
-Creating a database named "HotelDataAnalysis" and imported with the data consisting of multiple tables and renamed as '2018$', '2019$', '2020$', 'market_segment$', 'meal_cost$'
+Creating a database named `HotelDataAnalysis` and imported with the data consisting of multiple tables and renamed as `2018$`, `2019$`, `2020$`, `market_segment$`, `meal_cost$`
 
 <details>
    <summary>
@@ -68,9 +68,9 @@ Creating a database named "HotelDataAnalysis" and imported with the data consist
    
 </details>
 
-**2. Develop SQL Query:**
+**2. DEVELOP SQL QUERY:**
 
-**a) Taking a look at the data**
+**(A) Taking a look at the data**
 
 - Total number of columns in table 2018,2019 & 2020: 32 
 - Total number of rows in 2018 table:   21,996
@@ -79,7 +79,9 @@ Creating a database named "HotelDataAnalysis" and imported with the data consist
 - Total number of rows in all tables: 1,41,947
 
 <details>
-   <summary>LOOK AT DATA(SQL Query & Output)</summary>
+   <summary>
+      <code style="color:red">LOOK AT DATA(SELECT ALL)</code>
+   </summary>
    <br>
    
    ```SQL
@@ -118,12 +120,15 @@ Creating a database named "HotelDataAnalysis" and imported with the data consist
    ```
 </details>
    
-**b) Cleaning the data**
-   1. REMOVING DUPLICATE ROWS IF ANY - All duplicate rows are removed.
+**(B) Cleaning the data**
+   (i). REMOVING DUPLICATE ROWS IF ANY - All duplicate rows are removed.
 
-Union of multiple table as Hoteldata: It is observed that all tables for year 2018, 2019, 2020 have same number of columns with similar datatypes and in same order, UNION operator is used to combine. Total number of rows reduced to 1,00,756 after removing duplicates.
+`UNION` of multiple table as Hoteldata: It is observed that all tables for year 2018, 2019, 2020 have same number of columns with similar datatypes and in same order, UNION operator is used to combine. Total number of rows reduced to 1,00,756 after removing duplicates.
+
 <details>
-   <summary>SQL UNION operation</summary>
+   <summary>
+      <code style="color:red">SQL UNION operation</code>
+   </summary>
    <br>
 
 ```sql
@@ -142,12 +147,14 @@ select count(*) as total_rows from Hoteldata
 ```
 </details>
 
-   2. HANDLING NULL VALUES
+   (ii). HANDLING NULL VALUES
 
 First we will see the datatypes of all the columns and try to understand what unique values the columns hold. With that we can handle the missing/Null values and change the datatypes incase required.
 
 <details>
-   <summary>Datatype of Columns</summary>
+   <summary>
+      <code style="color:red">Datatype of Columns(TABLE SCHEMA)</code>
+   </summary>
    <br>
    
 ```sql
@@ -160,7 +167,14 @@ where TABLE_NAME = '2018$'
 
 </details>
 
-Checking the unique values the columns hold
+
+Checking the unique values the columns hold & handling the missing values:
+- no NULL fields for `hotel` `is_canceled` columns
+<details>
+   <summary>
+      <code style="color:red">QUERY(SELECT DISTINCT)</code>
+   </summary>
+   <br>
 
 ```sql
 select distinct hotel from Hoteldata
@@ -179,7 +193,16 @@ select distinct is_canceled from Hoteldata
 0
 1
 ```
+</details>
 
+- NULL values in `children` column were replaced by 0
+
+<details>
+   <summary>
+      <code style="color:red">QUERY</code>
+   </summary>
+   <br>
+   
 ```sql
 select distinct children from Hoteldata
 ```
@@ -192,8 +215,15 @@ NULL
 3
 10
 ```
-Note: This column 'children' has 0 as value which mean no children were present in the customers, so NULL values are the missing values or 0. We can replace the null values with mean value of children but mean is between 0 & 1 so we replace with 0.
+</details>
 
+Note: This column 'children' has 0 as value which mean no children were present in the customers, so NULL values are the missing values or 0. We can replace the null values with mean value of children but mean is between 0 & 1 so we replace with 0.
+<details>
+   <summary>
+      <code style="color:red">QUERY(AVERAGE)</code>
+   </summary>
+   <br>
+   
 ```sql
 select avg(children) from Hoteldata
 ```
@@ -201,13 +231,29 @@ select avg(children) from Hoteldata
 -- OUTPUT
 0.133680073053559
 ```
+</details>
 
+<details>
+   <summary>
+      <code style="color:red">QUERY(UPDATE)</code>
+   </summary>
+   <br>
+   
 ```sql
 Update dbo.[2020$] /* also 2018$ & 2019$ */
 SET children = 0
 Where children IS NULL;
 -- all NULL values are replaced with 0 now.
 ```
+</details>
+
+- NULL in `country` column is replaced by 'Others'
+
+<details>
+   <summary>
+      <code style="color:red">QUERY(COUNT,GROUP)</code>
+   </summary>
+   <br>
 
 ```sql
 select country, count(country) from Hoteldata
@@ -218,7 +264,14 @@ group by country
 -- OUTPUT
 NULL	561  /* replaced all the values written as NULL to OTHERS */
 ```
+</details>
 
+<details>
+   <summary>
+      <code style="color:red">QUERY(UPDATE)</code>
+   </summary>
+   <br>
+   
 ```sql
 Update dbo.[2020$]  /* also 2018$ & 2019$ */
 SET country = 'OTHERS'
@@ -228,9 +281,16 @@ where country = 'NULL'
 -- OUTPUT
 (83 rows affected) 
 ```
+</details>
 
-Similarly we have NULL values in agent & company columns which are now replaced by 0.
+- Similarly we have NULL values in `agent` & `company` columns which are now replaced by 0.
 
+<details>
+   <summary>
+      <code style="color:red">QUERY(UPDATE)</code>
+   </summary>
+   <br>
+   
 ```sql
 Update dbo.[2020$]
 SET company = 0
@@ -240,9 +300,16 @@ UPDATE dbo.[2020$]
 SET agent = 0
 where agent IS NULL
 ```
+</details>
 
-Note: It was observed with below query that sum of adults, children & babies i.e., total customers against booking is 0, for few of the rows. So we will remove scuh rows.
+- Rows are removed/dropped were total customers are 0.
 
+<details>
+   <summary>
+      <code style="color:red">QUERY(SELECT DISTINCT,COUNT,GROUP)</code>
+   </summary>
+   <br>
+   
 ```sql
 select distinct (adults + children + babies), count(adults + children + babies) as count from Hoteldata
 group by (adults + children + babies)
@@ -265,9 +332,15 @@ group by (adults + children + babies)
 5	156
 2	66028
 ```
+</details>
 
-Deleting the rows with 0 total no of customers againt booking
-
+Note: It was observed with above query that sum of adults, children & babies i.e., total customers against booking is 0, for few of the rows. So we will remove such rows.
+<details>
+   <summary>
+      <code style="color:red">QUERY(DELETE)</code>
+   </summary>
+   <br>
+   
 ```sql
 delete from dbo.[2018$]   /* also for 2019$ & 2020$ */ 
 where (adults + children + babies) = 0
@@ -276,17 +349,31 @@ where (adults + children + babies) = 0
 -- OUTPUT
 (29 rows affected)  /* (114 rows affected) (67 rows affected) */
 ```
-   3. CONVERTING COLUMNS TO APPROPRIATE DATATYPE
+</details>
 
-Observed columns like adults, children, babies, agent, company have 'float' or 'nvarchar' as shown above in table_schema but appropriate datatype is 'int'
+   (iii). CONVERTING COLUMNS TO APPROPRIATE DATATYPE
 
+- Observed columns like adults, children, babies, agent, company have 'float' or 'nvarchar' as shown above in table_schema but appropriate datatype is 'int'
+
+<details>
+   <summary>
+      <code style="color:red">QUERY(ALTER TABLE, INT)</code>
+   </summary>
+   <br>
+   
 ```sql
 ALTER TABLE dbo.[2018$]
 ALTER COLUMN company INT /* altering the datatype of company column to INT */
 ```
+</details>
 
-Observed the 'reservation_status_date' column datatype as 'datetime' while no time being recorded, shown 5 outputs below.
-
+- Observed the 'reservation_status_date' column datatype as 'datetime' while no time being recorded, shown 5 outputs below.
+<details>
+   <summary>
+      <code style="color:red">QUERY(TOP)</code>
+   </summary>
+   <br>
+   
 ```sql
 SELECT TOP 5 reservation_status_date
 FROM Hoteldata
@@ -299,8 +386,15 @@ FROM Hoteldata
 2018-05-11 00:00:00.000
 2018-05-29 00:00:00.000
 ```
-Now, converting the datatype to 'DATE' - 'YYYY-MM-DD'
+</details>
 
+Now, converting the datatype to 'DATE' - 'YYYY-MM-DD'
+<details>
+   <summary>
+      <code style="color:red">QUERY(ALTER TABLE, DATE)</code>
+   </summary>
+   <br>
+   
 ```sql
 ALTER TABLE dbo.['2019$']
 ALTER COLUMN reservation_stats=us_date DATE
@@ -314,26 +408,38 @@ select TOP 5 reservation_status_date from Hoteldata
 2018-05-11
 2018-05-29
 ```
+</details>
 
-   4. REMOVING OUTINERS
+   (iv). REMOVING OUTINERS
 
 While checking for outliers in the dataset, found one in 'adr' column. By using simple max(), min(), avg(), std() functions once can identify the exteme values/outlier
-
-```sql
+<details>
+   <summary>
+      <code style="color:red">QUERY(MAX,MIN,AVG)</code>
+   </summary>
+   <br>
+   
+   ```sql
 select max(adr), min(), avg(adr)
 from Hoteldata
 -- OUTPUT
 5400	-6.38	104.624615407561
-```
+   ```
+</details>
 
 min(adr) has a negative value, which is not possible for average daily revenue = total daily revenue / total rooms sold. So we simply drop it.
 
-   5. ADDING COLUMNS
+   (v). ADDING COLUMNS
 
 - total_stays = (stays_in_weekend_nights + stays_in_week_nights) (datatype - FLOAT)
 - total_people = (adults + children + babies) (datatype - INT)
 - revenue = adr * total_stays (datatype - FLOAT)
-
+<details>
+   <summary>
+      <code style="color:red">QUERY(ALTER TABLE, FLOAT)</code>
+   </summary>
+   <br>
+   
 ```sql
 ALTER TABLE dbo.[2018$] /* adding column with datatype float */
 ADD total_stays FLOAT
@@ -342,63 +448,119 @@ UPDATE dbo.[2018$]
 SET total_stays = (stays_in_weekend_nights + stays_in_week_nights)
 WHERE total_stays IS NULL  /* update the values of total_stays */
 ```
+</details>
 similary all the columns are updated
 
-**c) Data analysis using SQL**
+**(C) Data analysis using SQL**
 
 Using data analysis we will try to answer few questions.
 
 Q 1) Is hotel revenue growing by year?
-
+<details>
+   <summary>
+      <code style="color:red">QUERY</code>
+   </summary>
+   <br>
+   
 ```sql
 select arrival_date_year, count(distinct arrival_date_month) as No_of_distinct_months, sum(revenue) as Total_revenue from Hoteldata
 group by arrival_date_year
 order by Total_revenue asc
 ```
+</details>
+<details>
+   <summary>
+      <code style="color:red">OUTPUT</code>
+   </summary>
+   <br>
+   
 ```sql
 -- OUTPUT
 2018	6	4885499.06
 2020	8	14281776.01
 2019	12	20181595.25
 ```
-The hotel revenue is increasing year on year, you can see year 2020 is between 2018 & 2019 since the revenue recorded is only for 8 months.
+</details>
+Ans- The hotel revenue is increasing year on year, you can see year 2020 is between 2018 & 2019 since the revenue recorded is only for 8 months.
 
 Q 2) What is the percentage of booking in each hotel & which generates highest adr?
 
+<details>
+   <summary>
+      <code style="color:red">QUERY</code>
+   </summary>
+   <br>
+   
 ```sql
 select hotel, count(hotel) as No_of_bookings, 
 ROUND((count(hotel) * 100 / (select count(*) from Hoteldata)),2) as percentage, FORMAT(avg(adr),'N2') as AVG_ADR
 from Hoteldata
 group by hotel
 ```
+</details>
+<details>
+   <summary>
+      <code style="color:red">OUTPUT</code>
+   </summary>
+   <br>
+   
 ```sql
 -- OUTPUT
 City Hotel	59800	59	108.97
 Resort Hotel	40760	40	98.26
 ```
+</details>
 
-   Around 60% bookings are for City Hotel and 40% bookings are for Resort Hotel. Average ADR of City Hotel is slightly higher than that of Resort Hotel, City hotel seems to be making slightly more revenue.
+Ans- Around 60% bookings are for City Hotel and 40% bookings are for Resort Hotel. Average ADR of City Hotel is slightly higher than that of Resort Hotel, City hotel seems to be making slightly more revenue.
 
 Q 3) How long do people stay at the hotels?
 
+<details>
+   <summary>
+      <code style="color:red">QUERY</code>
+   </summary>
+   <br>
+   
 ```sql
 select hotel, max(total_stays) as maximun_stay, ROUND(avg(total_stays),2) as average_stay
 from Hoteldata
 group by hotel
 ```
+</details>
+<details>
+   <summary>
+      <code style="color:red">OUTPUT</code>
+   </summary>
+   <br>
+   
 ```sql
 -- OUTPUT
 City Hotel	48	3.12
 Resort Hotel	69	4.43
 ```
-Maximun & Average stay in City hotel is 48 & 3.12 nights/days respectively & in Resort Hotel it is 69 & 4.43 nights respectively.
+</details>
 
+Ans- Maximun & Average stay in City hotel is 48 & 3.12 nights/days respectively & in Resort Hotel it is 69 & 4.43 nights respectively.
+
+<details>
+   <summary>
+      <code style="color:red">QUERY</code>
+   </summary>
+   <br>
+   
 ```sql
 select hotel, total_stays as num_of_days, count(total_stays) as count 
 from Hoteldata
 group by total_stays, hotel
 order by total_stays asc, count desc
 ```
+</details>
+<details>
+   <summary>
+      <code style="color:red">OUTPUT</code>
+   </summary>
+   <br>
+   
 ```sql
 -- OUTPUT
 Resort Hotel	0	456
@@ -475,19 +637,50 @@ Resort Hotel	56	2
 Resort Hotel	60	2
 Resort Hotel	69	1
 ```
-Most common stay length is 3 days/nights and we can observe here that for shorter stays say <=4 days City Hotel is preferred the most, whereas for longer stays Resort Hotel is preferred.
+</details>
 
-**3. Connect to Power BI to the database**
+Ans- Most common stay length is 3 days/nights and we can observe here that for shorter stays say <=4 days City Hotel is preferred the most, whereas for longer stays Resort Hotel is preferred.
+
+**3. CONNECT POWER BI TO THE DATABASE**
 
 Now we import this data from SQL server to PowerBI for further analyzing the data and try to summarize findings
 
 -- We load the Hoteldata table along with market_segment$ and meal_cost$ table and establishing relationship in PowerBI.
 
+<details>
+   <summary>
+      <code style="color:red">IMAGE</code>
+   </summary>
+   <br>
+   
+![image](https://github.com/MaharajSrinath/HotelDataAnalysis/assets/146663011/dab850bd-e2ce-44dc-8874-7e12c10fbc80)
+
+</details>
+
+- we can also join the tables in SQL
+   let us check the columns in `market_segment$` `meal_cost$` tables.
+  
+<details>
+   <summary>
+      <code style="color:red">QUERY</code>
+   </summary>
+   <br>
+   
 ```sql
 -- SHowing table schema of tables
 select TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH
 from INFORMATION_SCHEMA.COLUMNS
 where TABLE_NAME = 'meal_cost$' /* and 'market_segment$' */
+```
+</details>
+
+<details>
+   <summary>
+      <code style="color:red">OUTPUT</code>
+   </summary>
+   <br>
+   
+```sql   
 -- market_segment$ table
 dbo	market_segment$	Discount	float	NULL
 dbo	market_segment$	market_segment	nvarchar	255
@@ -496,9 +689,17 @@ dbo	market_segment$	market_segment	nvarchar	255
 dbo	meal_cost$	Cost	float	NULL
 dbo	meal_cost$	meal	nvarchar	255
 ```
+</details>
 
+   Table JOIN
+   
+<details>
+   <summary>
+      <code style="color:red">QUERY(LEFT JOIN)</code>
+   </summary>
+   <br>
+   
 ```sql
--- we can also join the tables in SQL
 select h.*, ms.Discount, mc.Cost
 from Hoteldata h
 LEFT JOIN dbo.market_segment$ ms
@@ -506,11 +707,10 @@ on h.market_segment = ms.market_segment
 left join dbo.meal_cost$ mc
 on h.meal = mc.meal
 ```
+</details>
 
-![image](https://github.com/MaharajSrinath/HotelDataAnalysis/assets/146663011/dab850bd-e2ce-44dc-8874-7e12c10fbc80)
-
-**4. Visualize** 
-We answer the following questions performing EDA.
+**4. VISUALIZE** 
+We answer the following questions performing EDA.(Check the [EDA powerpoint](https://github.com/MaharajSrinath/HotelDataAnalysis/blob/main/EDA%20Powerpoint.pdf))
 
  1) Which agent makes the most no. of bookings?
  2) Which room type is in most demand and which room type generates the highest adr?
@@ -537,7 +737,7 @@ We answer the following questions performing EDA.
  23) Do we required more parking lot space?
 
 
-**5. Summarize findings**
+**5. SUMMARIZE FINDINGS**
 
 After performing EDA on given dataset in SQL & POWER BI, made the following conclusions
 
