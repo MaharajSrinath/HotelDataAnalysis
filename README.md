@@ -780,6 +780,7 @@ A) There was a lot of duplicate data.
 B) Data was present in wrong datatype format.
 C) Choosing appropriate visualization techniques to use was difficult.
 D) A lot of null values were there in the dataset.
+```
 
 
 
